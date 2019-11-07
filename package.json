@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build-client && node index.js",
-    "build-client": "cd client && npm run-script build"
+    "build-client": "cd client && npm install && npm run-script build"
   },
   "author": "",
   "license": "ISC",
