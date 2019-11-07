@@ -13,7 +13,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 })
 
-
-PORT = 3001
+PORT = process.env.PORT || 3001;
 console.log("Started server on port: ", PORT)
 app.listen(PORT)
