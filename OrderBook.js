@@ -69,7 +69,57 @@ class OrderBook {
   }
 }
 
+//O(n + m) time complexity, requires lists to be sorted in decending price order
+function combine(a, aName, b, bName) {
+  let orders = []
+  let i = 0
+  let j = 0
+
+  while(i < a.length && j < b.length) {
+    if(a[i].price == b[j].price) {
+      orders.push({
+        price: a[i].price,
+        quantities: [
+          {name: aName, quantity: a[i].quantity},
+          {name: bName, quantity: b[j].quantity},
+        ]
+      })
+
+      i++
+      j++
+    } else if(a[i].price > b[j].price) {
+      orders.push({price: a[i].price, quantities: [{name: aName, quantity: a[i].quantity}]})
+      i++
+    } else {
+      orders.push({price: b[j].price, quantities: [{name: bName, quantity: b[j].quantity}]})
+      j++
+    }
+  }
+
+  //Handle when we only have elements from a single list left
+  while(i < a.length) {
+    orders.push({price: a[i].price, quantities: [{name: aName, quantity: a[i].quantity}]})
+    i++
+  }
+
+  while(j < b.length) {
+    orders.push({price: b[j].price, quantities: [{name: bName, quantity: b[j].quantity}]})
+    j++
+  }
+
+  return orders
+}
+
+class CombinedOrderBook {
+  constructor(a, b) {
+    this.asks = combine(a.asks, a.name, b.asks, b.name)
+    this.bids = combine(a.bids, a.name, b.bids, b.name)
+  }
+}
+
 module.exports = {
+  CombinedOrderBook,
   OrderBook,
-  aggregate
+  aggregate,
+  combine
 }
