@@ -1,26 +1,35 @@
 const express = require('express');
+const exphbs  = require('express-handlebars');
 const path = require('path');
 const request = require('request')
-const OrderBook = require('./OrderBook.js');
+
+const OrderBook = require('./OrderBook.js').OrderBook;
 
 const app = express();
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
+
 const B_GET = 'https://api.bittrex.com/api/v1.1/public/getorderbook?market=BTC-ETH&type=both';
 const P_GET = 'https://poloniex.com/public?command=returnOrderBook&currencyPair=BTC_ETH&depth=100'
 
+// app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static('public'))
 
-app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('/foo', (req, res) => {
-    request(B_GET, function(error, response, body) {
-      let result = JSON.parse(body)['result']
-      let ob = OrderBook.fromBittrex(result)
-    });
+app.get('/', (req, res) => {
+  let precision = req.query.precision || 4
+
+  request(B_GET, function(error, response, body) {
+    let result = JSON.parse(body)['result']
+    let ob = OrderBook.fromBittrex(result, precision)
+    res.render("home", {
+      ob: ob
+    })
+  });
 
     // request(P_GET, function(error, response, body) {
     //   let result = JSON.parse(body)
     //   ob = OrderBook.fromPolo(result)
     // });
-
-    res.send("Done")
 })
 
 app.get('*', (req, res) => {

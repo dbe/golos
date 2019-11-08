@@ -48,24 +48,24 @@ class OrderBook {
     this.name = name
   }
 
-  static fromPolo(data) {
+  static fromPolo(data, precision=4) {
     let asks = [];
     let bids = [];
 
     data.asks.forEach(ask => asks.push(poloOrder(ask)));
     data.bids.forEach(bid => bids.push(poloOrder(bid)));
 
-    return new OrderBook(bids, asks, 'Poloniex')
+    return new OrderBook(bids, asks, 'Poloniex', precision)
   }
 
-  static fromBittrex(data) {
+  static fromBittrex(data, precision=4) {
     let asks = [];
     let bids = [];
 
     data.sell.forEach(ask => asks.push(bittrexOrder(ask)));
     data.buy.forEach(bid => bids.push(bittrexOrder(bid)));
 
-    return new OrderBook(bids, asks, 'Bittrex')
+    return new OrderBook(bids, asks, 'Bittrex', precision)
   }
 }
 

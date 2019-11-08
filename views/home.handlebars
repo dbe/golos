@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Golos</h1>
+
+
+  <h2>Bids</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">price</th>
+        <th scope="col">quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each ob.bids}}
+        <tr>
+          <td>{{this.price}}</td>
+          <td>{{this.quantity}}</td>
+        </tr>
+      {{/each}}
+  </table>
+
+  <h2>Asks</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">price</th>
+        <th scope="col">quantity</th>
+      </tr>
+    </thead>
+    {{#each ob.asks}}
+      <tr>
+        <td>{{this.price}}</td>
+        <td>{{this.quantity}}</td>
+      </tr>
+    {{/each}}
+  </table>
+</div>
