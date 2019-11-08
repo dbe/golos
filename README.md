@@ -1,0 +1,3 @@
+To test:
+
+npm test

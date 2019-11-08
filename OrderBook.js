@@ -22,13 +22,13 @@ function aggregate(orders, precision) {
 
   for(let i = 1; i < orders.length; i++) {
     let order = orders[i];
-    order.price = limitPrecision(order.price, precision)
+    let price = limitPrecision(order.price, precision)
 
-    if(last.price == order.price) {
+    if(last.price == price) {
       last.quantity += order.quantity
     } else {
       aggregated.push(last)
-      last = order
+      last = {price, quantity: order.quantity}
     }
   }
   aggregated.push(last)
@@ -69,4 +69,7 @@ class OrderBook {
   }
 }
 
-module.exports = OrderBook
+module.exports = {
+  OrderBook,
+  aggregate
+}
