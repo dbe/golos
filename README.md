@@ -14,6 +14,13 @@ To run tests:
 
 ```$ npm test```
 
+# Run Locally
+1. Clone the repo
+2. ```npm install```
+3. ```npm start```
+4. Go to localhost:3001 in your browser
+
+
 # TODOS
 There are many notable shortcomings and features which need to be improved before this app would be production ready. In the interest of time-capping the work on this project, they have been left as tasks to do later.
 
