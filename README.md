@@ -3,6 +3,8 @@ Golos is a simple website to show a combined order book for the Bittrex and Polo
 
 There is a notable lack of a front-end framework used. This was a design decision used based on the limited interactive nature of the site. If we were to add realtime updates, and other interactive features, I'd consider using something like React.
 
+The live app is hosted at: https://afternoon-reef-46531.herokuapp.com/
+
 # Style
 The code is written in a noteably functional style. The OrderBook.js file is worth particular mention in this regard. The OrderBook and CombinedOrderBook are essentially just named tuples. The main logic of aggregating and combining order books is implemented in a purely functional way, no side effects or mutations. This allows for easy reasoning about the code as well as great unit testability.
 
