@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build-client && node index.js",
-    "build-client": "cd client && npm install && npm run-script build",
+    "start": "node index.js",
     "test": "jasmine"
   },
   "author": "",
