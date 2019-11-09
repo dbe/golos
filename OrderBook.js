@@ -1,17 +1,3 @@
-function poloOrder(order) {
-  return {
-    price: parseFloat(order[0]),
-    quantity: order[1],
-  }
-}
-
-function bittrexOrder(order) {
-  return {
-    price: order.Rate,
-    quantity: order.Quantity
-  }
-}
-
 function aggregate(orders, precision) {
   let aggregated = []
 
@@ -42,32 +28,11 @@ function limitPrecision(num, precision) {
 
 
 class OrderBook {
-  constructor(bids, asks, name, precision=4) {
-    this.bids = aggregate(bids, precision)
+  constructor(asks, bids, name, precision=4) {
     this.asks = aggregate(asks, precision)
+    this.bids = aggregate(bids, precision)
     this.name = name
   }
-
-  static fromPolo(data, precision=4) {
-    let asks = [];
-    let bids = [];
-
-    data.asks.forEach(ask => asks.push(poloOrder(ask)));
-    data.bids.forEach(bid => bids.push(poloOrder(bid)));
-
-    return new OrderBook(bids, asks, 'Poloniex', precision)
-  }
-
-  static fromBittrex(data, precision=4) {
-    let asks = [];
-    let bids = [];
-
-    data.sell.forEach(ask => asks.push(bittrexOrder(ask)));
-    data.buy.forEach(bid => bids.push(bittrexOrder(bid)));
-
-    return new OrderBook(bids, asks, 'Bittrex', precision)
-  }
-}
 
 //O(n + m) time complexity, requires lists to be sorted in decending price order
 function combine(a, aName, b, bName) {
