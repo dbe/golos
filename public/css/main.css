@@ -13,3 +13,11 @@
 .table td {
   padding: 4px;
 }
+
+.api-Bittrex {
+  color: green;
+}
+
+.api-Poloniex {
+  color: red;
+}

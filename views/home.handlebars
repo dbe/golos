@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="dropdown">
+  <!-- <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       ETH-BTC
     </button>
@@ -8,7 +8,7 @@
       <a class="dropdown-item" href="#">Another action</a>
       <a class="dropdown-item" href="#">Something else here</a>
     </div>
-  </div>
+  </div> -->
 
   <h2>Bids</h2>
   <table class="table">
@@ -19,7 +19,7 @@
           Quantities
           (
           {{#each names}}
-            {{this}}
+            <span class="api-{{this}}">{{this}}</span>
             {{#unless @last}}
               ,
             {{/unless}}
@@ -30,13 +30,11 @@
     </thead>
     <tbody>
 
-      {{#each ob.bids as |order|}}
+      {{#each ob.bids}}
         <tr>
-          <td>{{order.price}}</td>
+          <td>{{this.price}}</td>
           <td>
-            {{#each names as |name|}}
-              {{name}}
-            {{/each}}
+            {{formatQuantities this.quantities ../names}}
           </td>
         </tr>
       {{/each}}
@@ -46,14 +44,26 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">price</th>
-        <th scope="col">quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">
+          Quantities
+          (
+          {{#each names}}
+            <span class="api-{{this}}">{{this}}</span>
+            {{#unless @last}}
+              ,
+            {{/unless}}
+          {{/each}}
+          )
+        </th>
       </tr>
     </thead>
     {{#each ob.asks}}
       <tr>
         <td>{{this.price}}</td>
-        <td>{{this.quantity}}</td>
+        <td>
+          {{formatQuantities this.quantities ../names}}
+        </td>
       </tr>
     {{/each}}
   </table>
