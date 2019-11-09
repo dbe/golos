@@ -26,13 +26,13 @@ function limitPrecision(num, precision) {
   return Math.round(num * factor) / factor
 }
 
-
 class OrderBook {
   constructor(asks, bids, name, precision=4) {
     this.asks = aggregate(asks, precision)
     this.bids = aggregate(bids, precision)
     this.name = name
   }
+}
 
 //O(n + m) time complexity, requires lists to be sorted in decending price order
 function combine(a, aName, b, bName) {

@@ -13,13 +13,15 @@ app.use(express.static('public'))
 app.get('/', async (req, res) => {
   let precision = req.query.precision || 4
 
-  // let bittrex = API.BittrexAPI.orderBook()
-  let poloniex = API.PoloniexAPI.orderBook()
-  console.log('poloniex: ', poloniex);
-  // console.log('poloniex: ', poloniex);
-  // let combined = new CombinedOrderBook(bittrex, poloniex)
-  // console.log('combined: ', combined);
-  res.send("hi")
+  queries = [API.BittrexAPI.orderBook(precision), API.PoloniexAPI.orderBook(precision)]
+  Promise.all(queries).then( ([bittrex, poloniex]) => {
+    let combined = new CombinedOrderBook(bittrex, poloniex)
+
+    res.render("home", {
+      ob: combined,
+      names: ["Bittrex", "Poloniex"]
+    })
+  })
 })
 
 PORT = process.env.PORT || 3001;

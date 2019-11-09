@@ -1,19 +1,43 @@
 <div class="container">
-  <h1>Golos</h1>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      ETH-BTC
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+  </div>
 
   <h2>Bids</h2>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">price</th>
-        <th scope="col">quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">
+          Quantities
+          (
+          {{#each names}}
+            {{this}}
+            {{#unless @last}}
+              ,
+            {{/unless}}
+          {{/each}}
+          )
+        </th>
       </tr>
     </thead>
     <tbody>
-      {{#each ob.bids}}
+
+      {{#each ob.bids as |order|}}
         <tr>
-          <td>{{this.price}}</td>
-          <td>{{this.quantity}}</td>
+          <td>{{order.price}}</td>
+          <td>
+            {{#each names as |name|}}
+              {{name}}
+            {{/each}}
+          </td>
         </tr>
       {{/each}}
   </table>

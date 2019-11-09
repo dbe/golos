@@ -5,10 +5,11 @@ const OrderBook = require('./OrderBook.js').OrderBook
 const requestPromise = util.promisify(request);
 
 class API {
-  static async orderBook() {
-    let response = await requestPromise(this.URL)
-    let [asks, bids] = this.parseResponse(response)
-    return new OrderBook(asks, bids, this.NAME)
+  static orderBook(precision=4) {
+    return requestPromise(this.URL).then(response => {
+      let [asks, bids] = this.parseResponse(response)
+      return new OrderBook(asks, bids, this.NAME, precision)
+    })
   }
 }
 
@@ -35,7 +36,6 @@ class PoloniexAPI extends API {
   }
 }
 
-
 class BittrexAPI extends API {
   static get URL() {return 'https://api.bittrex.com/api/v1.1/public/getorderbook?market=BTC-ETH&type=both'}
   static get NAME() {return 'Bittrex'}
@@ -58,7 +58,6 @@ class BittrexAPI extends API {
     }
   }
 }
-
 
 module.exports = {
   BittrexAPI,
