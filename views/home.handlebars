@@ -1,17 +1,19 @@
 <div class="container">
-  <!-- <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      ETH-BTC
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-  </div> -->
 
   <h1 class="text-center">ETH/BTC</h1>
   <p class="text-center">*Prices listed to buy 1 ETH in BTC</p>
+
+  <form method="get" action="/" id="precision">
+    <label for="precision">Aggregated to precision</label>
+    <select name="precision" form="precision" onchange="this.form.submit()">
+      {{option 2 precision}}
+      {{option 3 precision}}
+      {{option 4 precision}}
+      {{option 5 precision}}
+      {{option 6 precision}}
+    </select>
+  </form>
+
 
   <h2>Bids</h2>
   <table class="table">

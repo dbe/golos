@@ -2,13 +2,16 @@ const express = require('express')
 const exphbs  = require('express-handlebars')
 const path = require('path')
 const CombinedOrderBook = require('./OrderBook.js').CombinedOrderBook
-const formatQuantities = require('./HandlebarsHelpers.js').formatQuantities
+const helpers = require('./HandlebarsHelpers.js')
 const API = require('./API.js')
 
 const app = express()
 
 let hbs = exphbs.create({
-  helpers: {formatQuantities }
+  helpers: {
+    formatQuantities: helpers.formatQuantities,
+    option: helpers.option
+  }
 })
 
 app.engine('handlebars', hbs.engine)
@@ -24,7 +27,8 @@ app.get('/', async (req, res) => {
 
     res.render("home", {
       ob: combined,
-      names: ["Bittrex", "Poloniex"]
+      names: ["Bittrex", "Poloniex"],
+      precision: precision
     })
   })
 })

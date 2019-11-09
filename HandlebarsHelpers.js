@@ -30,6 +30,17 @@ function formatQuantities(quantities, names) {
   return new Handlebars.SafeString(ret)
 }
 
+function option(value, selected) {
+  ret = `<option value="${value}" `
+  if(value == selected) {
+    ret += 'selected="selected"'
+  }
+  ret += `>${value}</option>`
+
+  return new Handlebars.SafeString(ret)
+}
+
 module.exports = {
-  formatQuantities
+  formatQuantities,
+  option
 }

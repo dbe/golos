@@ -7,7 +7,7 @@ function aggregate(orders, precision) {
   }
 
   for(let i = 1; i < orders.length; i++) {
-    let order = orders[i];
+    let order = orders[i]
     let price = limitPrecision(order.price, precision)
 
     if(last.price == price) {
